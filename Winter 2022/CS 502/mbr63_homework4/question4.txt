@@ -1,0 +1,56 @@
+;Question 4 - Add Up
+JMP start_q
+input_value: DB 10
+result_value: DB 0 ;Grader will check this memory Location
+start_q:
+    MOV A, [input_value] ;Load Value
+    PUSH A ;Push for Function Call
+    CALL addUp ;Call Function
+    POP A ;Get Return Value
+    MOV [result_value],A ;Store Answer
+    HLT
+;Implementation of
+;Function addUp(n)
+;    If(n==0)
+;        return 0
+;    Else
+;        return n + addUp(n-1)
+;    EndIf
+;EndFunction
+ 
+addUp:
+                ;Back up all registers
+                PUSH A
+                PUSH B
+                PUSH C
+                PUSH D
+                ;Get input from stack
+                MOV A, [SP+6]
+                ;If n==0
+                CMP A, 0
+                ;JMP
+                JZ addUp_base
+                JNZ addUp_rec
+addUp_base:
+                ;just return 0
+                MOV A,0
+                JMP addUp_exit
+addUp_rec:
+                ;return n + addUp(n-1)
+                MOV B, A; store input
+                SUB A, 1; compute n-1
+                PUSH A ; input for addUp(n-1)
+                CALL addUp
+                POP A ;result of addUp(n-1)
+                ADD A,B ;n + addUp(n-1)
+                JMP addUp_exit
+addUp_exit:
+                ;Put Result back onto stack
+                MOV [SP+6],A
+                ;Restore Backup registers
+                POP D
+                POP C
+                POP B
+                POP A
+                ;Return
+                RET

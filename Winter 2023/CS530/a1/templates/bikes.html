@@ -1,0 +1,47 @@
+<!-- Mangesh Raut, mbr63@drexel.edu
+CS530: DUI, Assignment [1] -->
+
+{% extends 'base.html' %}
+{% set active = "OurBikes" %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block title %}
+Our Bikes
+{% endblock %}
+
+{% block content %}
+
+<h1>Our Bikes</h1>
+<p>
+    We have the best selection of bikes around. Please see our selection below!
+</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Wheels</th>
+      <th>Size</th>
+      <th>Motor</th>
+      <th>Folding</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for bike in bikes %}
+    <tr>
+      <td><img src="{{ url_for('static', filename='img/bikes/' + bike.image) }}" style="max-width: 100px" /></td>
+      <td>{{ bike.name }}</td>
+      <td>{{ bike.wheels }}</td>
+      <td>{{ bike.size }}</td>
+      <td>{{ bike.motor }}</td>
+      <td>{{ bike.folding }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

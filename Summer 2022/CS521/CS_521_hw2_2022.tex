@@ -1,0 +1,92 @@
+\documentstyle{article}
+\oddsidemargin 0.15in
+\textwidth 6.25in
+\topmargin-0.85in
+\textheight 9.0in
+\headsep 0.6in
+\begin{document}
+\begin{center}
+\begin{LARGE}{\bf CS 521: Data Structures and Algorithms 1\\Summer
+      2022 (Homework 2)} \end{LARGE}
+\end{center}
+
+For an extra 5 credit points submit your answers as a latex compiled with pdf. Please submit the .tex file and the .pdf file.
+
+
+\begin{enumerate}
+\item Let us say that an array $A$ of length $n$ is almost sorted with
+  errors of  size $k$  for $k  < n$ if,  for any  $1\le I,J\le  n$, if
+  $J-I>k$ then  $A[J]\ge A[I]$.  Thus, the array  does not have  to be
+  completely sorted, but any two elements in the array that are out of
+  order cannot be more than $k$ places apart. For example, the list:
+  $$5, 8, 1, 6, 15, 12, 11,  20, 19, 25, 30, 35, 32$$
+  is almost sorted
+  with error  of size $2$.  $A[3] =  1$ is less  than $A[1] =  5$, and
+  $3-1=2$ but there are no elements  out of order that are $3$ or more
+  steps apart.
+\begin{itemize}
+\item[{\bf a)}] (10 Pts. ) Show how  Quicksort can be  modified to
+  produce  a list  that is  almost  sorted with  errors of  size $k$.  
+  Assuming $k$ is much less than $n$, what is the best case running
+  time of this modified Quicksort?
+
+\item[{\bf  b)}] (10 Pts.)  If  the input  array is  almost sorted
+  with error of size $k$, what is the running time of insertion sort
+  algorithm to sort it?  Justify your answer.
+\end{itemize}
+
+\item Recall the Partition algorithm: 
+\begin{verbatim}
+Partition(A; p; r) 
+  1 % Partition A[p..r] around last element x = A[r] 
+  2 % Return q s.t. A[q]=x, A[q-1]<=x and A[q + 1] > x. 
+  3 x=A[r] 
+  4 i=p 
+  5 while (A[i]<=x) and (i<r) 
+  6   do i=i+1 
+  7 for j=i+1 to r 
+  8   if A[j]<=x 
+  9      then exchange A[i],A[j] 
+  10     i=i+1 
+  11 return i-1 
+\end{verbatim}
+\begin{itemize}
+\item[(a)] (10 Pts.)  Let $N(y)$ be the number of times a particular element with
+  value $y$ is exchanged with another element during this procedure.
+  In the worst case, what is the maximum value of $N(y)$ for a single
+  element with value $y$?
+\item[(b)] (10 Pts.) Give a worst-case upper-bound on the average, over all
+  elements in the array, of the value $N(y)$.
+\end{itemize}
+
+
+\item (20 Pts.) We are given an array $A=\{a_1,...,a_n\}$ of $n=2^k$
+  numbers. Note that $k$ is a nonnegative integer, i.e., $k = \log n$.
+  Our goal is to find the $k$ order statistics $1, 2, 4,
+  8,...,2^k$ of $A$. Propose an algorithm that can determine these $k$ order
+  statistics in a total of $\Theta(n)$ time in the worst case.
+
+\item (20 Pts.)  Show that we can find and sort the $k$ largest
+  elements of a set of size $n$ in $\Theta(n+k\log k)$ worst-case
+  time.
+
+\item (20  Pts.) For each  of  the following  recurrences,  find the  asymptotic
+  solution [that is, you do not  need to find $T(n)$ precisely, but do
+  need  to find  $S(n)$  such that  $T(n)=\Theta(S(n))$]. Assume  that
+  $T(n)$  is constant  for  sufficiently small  $n$.   Use the  master
+  method whenever applicable (and explain which case applies), if it's
+  not applicable, prove your solution using a recursion tree or induction.
+\begin{enumerate}
+  \item $T(n)=4T(n/2) + n$.
+  \item $T(n)=4T(n/2) + n^2$.
+  \item $T(n)= 3T(n/2) + n^2$.
+ \item $T(n)= 81T(n/3)+ n^4/3+ 81n^3$. 
+
+\end{enumerate}
+\end{enumerate}
+
+
+\end{document}
+
+
+

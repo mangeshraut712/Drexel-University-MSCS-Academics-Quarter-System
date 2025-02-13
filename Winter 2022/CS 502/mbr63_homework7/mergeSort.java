@@ -1,0 +1,159 @@
+//Mark Boady - CS502
+//Insertion Sort Experiment
+
+//This function tests meregSort to see how fast it is in practice.
+
+//Libraries
+import java.util.Random;
+
+public class mergeSort {
+	// Random Number Generator
+	// A computer cannot get truely random numbers.
+	// It can generate a sequence that looks random.
+	// To start the sequence at an unpredicatable point, use current time
+	public static final Random RAND = new Random(System.currentTimeMillis());
+
+	// The main function runs all the tests.
+	public static void main(String[] argv) {
+		// How many random arrays to test at each size.
+		int arrays_per_size = 10;
+		int current_size = 8;
+		int max_size = 131072;
+
+		// Loop over different sizes
+		while (current_size <= max_size) {
+			// Run Tests and print results
+			test_size(current_size, arrays_per_size);
+			// Set up for next test
+			current_size = current_size * 2;
+		}
+		// End the Main Function
+		return;
+	}
+
+	// --------------Function Definitions Below This Line---------------
+	// This function checks to see if an array is sorted.
+	// It returns 1 if the array is sorted.
+	// It returns 0 if the array is not sorted.
+	public static boolean is_sorted(int[] Array, int size) {
+		int i = 1;
+		while (i < size) {
+			if (Array[i] < Array[i - 1])
+				return false;// Not Sorted!
+			i = i + 1;
+		}
+		return true;
+	}
+
+	// This function gives you a random array.
+	// It creates a new array of size given and returns the pointer to it.
+	// The array will be have random numbers in it.
+	public static int[] random_array(int size) {
+		// We need to ask the computer for memory
+		int[] Array = new int[size];
+		int counter = 0;
+		while (counter < size) {
+			Array[counter] = RAND.nextInt(10 * size);
+			counter = counter + 1;
+		}
+		return Array;
+	}
+
+	// This function runs multiple tests for a specific size.
+	// It prints a summary of the results.
+	public static void test_size(int size, int num_of_tests) {
+		int tests_run = 0;
+		int tests_passed = 0;
+		// Clock Items for timing
+		long start;
+		long end;
+		long time_used;
+		long total_time = 0;// For computing average
+		while (tests_run < num_of_tests) {
+			// Generate a random array
+			int[] my_random_array = random_array(size);
+			// RUN THE TEST
+			start = System.currentTimeMillis();
+			mergesort(my_random_array, size);
+			end = System.currentTimeMillis();
+			// END OF TEST RUN
+			// How long did it take?
+			time_used = (end - start);// Convert to seconds
+			total_time = total_time + time_used;
+			// Did it actually sort?
+			if (is_sorted(my_random_array, size)) {
+				tests_passed = tests_passed + 1;
+			}
+			// Count that we ran a tests
+			tests_run = tests_run + 1;
+			// Delete From Memory
+			my_random_array = null;// Java will delete now
+			// Print out Results
+		}
+		System.out.printf("Test size: %d\n", size);
+		System.out.printf("Tests Ran: %d\n", tests_run);
+		System.out.printf("Tests Passed: %d\n", tests_passed);
+		System.out.printf("Average Time to Sort: %f milliseconds.\n", ((double) total_time) / ((double) tests_run));
+	}
+
+	// -------------------------------------------------------
+	// -------------------Merge Sort-------------------------
+	// -------------------------------------------------------
+
+	// Merge Sort
+	// This is what we are actually tests
+	// It returns void because it changes the array in place
+	// See lecture for details
+
+	private static void merge(int[] Array, int start, int middle, int stop) {
+		// create two aux arrays
+		int firstSectionSize = middle - start + 1;
+		int[] firstSection = new int[firstSectionSize];
+		int secondSectionSize = stop - middle;
+		int[] secondSection = new int[secondSectionSize];
+		// copy elements in array from start to stop into aux array
+		for (int i = 0; i < firstSectionSize; i++)
+			firstSection[i] = Array[start + i];
+		for (int j = 0; j < secondSectionSize; j++)
+			secondSection[j] = Array[middle + 1 + j];
+		// set variables
+		int i = 0;
+		int j = 0;
+		// loop over values
+		for (int k = start; k <= stop; k++) {
+			if (i >= firstSectionSize) {
+				Array[k] = secondSection[j];
+				j = j + 1;
+			} else if (j >= secondSectionSize) {
+				Array[k] = firstSection[i];
+				i = i + 1;
+			} else if (secondSection[j] > firstSection[i]) {
+				Array[k] = firstSection[i];
+				i = i + 1;
+			} else {
+				Array[k] = secondSection[j];
+				j = j + 1;
+			}
+		}
+	}
+
+	// the mergesort function gives the recursive
+	public static void mergesort(int[] Array, int size) {
+		msort(Array, 0, size - 1);
+	}
+
+	// this function does the real merge sort
+	private static void msort(int[] Array, int start, int stop) {
+		if (start >= stop) {
+			return;
+		}
+		// find the middle point
+		int middle = start + ((stop - start) / 2);
+		// sort first and second halves
+		msort(Array, start, middle);
+		msort(Array, middle + 1, stop);
+		// merge the sorted halves
+		merge(Array, start, middle, stop);
+	}
+
+}

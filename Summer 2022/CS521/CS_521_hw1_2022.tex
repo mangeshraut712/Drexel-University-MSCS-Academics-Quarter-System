@@ -1,0 +1,57 @@
+
+ 
+
+\documentstyle{article} 
+\oddsidemargin 0.15in
+\textwidth 6.25in
+\topmargin-0.85in
+\textheight 9.0in
+\headsep 0.6in
+
+\begin{document}
+\begin{center}
+\begin{LARGE}{\bf CS 521: Data Structures and Algorithms 1\\Summer
+    2022 (Homework 1)} \end{LARGE}
+\end{center}
+
+Please submit answers as either a word document or a pdf.  You can submit scanned hand draw notes but they must clear and legible. Lastly, if you submit a pdf compiled from latex (along with the .tex file) you will receive 5 bonus points.
+
+\begin{enumerate}
+\item (20 Pts.)  Prove by induction that the following holds for $n \geq 0$
+\begin{enumerate}
+\item $\displaystyle\sum_{i=0}^{n}{i(i+1)} =\frac{1}{6} n(n+1)(2n+4)$ \\
+ 
+\item $\displaystyle\sum_{i=0}^{n}{i 2^i} = (n-1) 2^{n+1} +2$ \\
+\end{enumerate}
+ 
+
+\item (20 Pts.) Let    $f,r,g,s$     be    positive-valued,
+  monotonically-increasing functions on  the natural numbers. For each
+  of  the following  statements, prove  the claim  is true  or  give a
+  counter-example:
+\begin{itemize}
+\item[a)] If $f(n) =O(r(n))$ and $g(n) =O(s(n))$ then $f(n).g(n)
+  =O(r(n) .s(n))$.
+ \item[b)] If $f(n) =O(r(n))$ and $g(n) =O(s(n))$ then
+   ${\frac{f(n)}{g(n)}}=O(  {\frac{r(n)}{s(n)}}  )$. 
+ \item[c)] Either $f(n) =O(g(n))$ or $g(n) =O(f(n))$.
+\end{itemize}
+\item (20 Pts.) For  each pair of functions state  whether $f(n)=O(g(n))$ and/or
+  $g(n)=O(f(n))$.
+\begin{enumerate}
+\item $f(n)=\log_2 (n^3)$ , $g(n)=\log_{10} (5n)$.
+\item $f(n)=\log_2 (n^5)$ , $g(n)=(\log_{10} n)^2$.
+\item $f(n)=n (\log_2 n)^2$ , $g(n)=n^{3/2}$.
+\item $f(n)=2^{\sqrt{n}}$ , $g(n)=n^2$.
+\end{enumerate}
+\item (10  Pts.) Prove that $n^{\log_2 n}$ is $O(2^n)$ directly from  the definition of $O$-relation.
+\item (10  Pts.)  Prove that $\log n$ is $O(\sqrt{n})$ directly from the definition of $O$-relation.
+\item (20  Pts.)  Professor Jane Doe is researching algorithms that can be used for facial recognition given an image with $x,y$ dimensions, where $x$ always equals $y$ (e.g., $x = y$).  She claims her algorithm called \emph{Fast Facial Recognition} has the following complexity, $FFR(x*y=n)=100n^4 + 20n^2 -100$.  She compares \emph{FFR} to the state of the art algorithm which runs in $g(n=y)=n^5$ claiming $FFR(n)=o(g(n))$ is she correct? Show why or why not using the definition of small oh.
+
+
+\end{enumerate}
+\end{document}
+
+
+
+
