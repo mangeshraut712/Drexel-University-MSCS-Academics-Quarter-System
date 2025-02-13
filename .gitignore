@@ -5,3 +5,7 @@ Winter 2022/INFO 608/participant a.mp4
 *.mp4
 *.mov
 *.csv
+*.mp4
+*.mov
+*.csv
+.git/lfs
